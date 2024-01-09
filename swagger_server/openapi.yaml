@@ -1,0 +1,109 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: bensong2017@hotmail.com
+  description: This is a demo start for fastAPI
+  title: Stem
+  version: 0.0.1
+servers:
+- url: http://localhost:9000/api
+tags:
+- description: config
+  name: config
+- description: API for health metrics
+  name: health
+paths:
+  /config:
+    get:
+      description: Get connector config.
+      operationId: GetConfig
+      parameters:
+      - description: "Configuration Id, e.g. sf_express.test"
+        explode: false
+        in: query
+        name: conf_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: "Configuration Table, e.g sf_express"
+        explode: false
+        in: query
+        name: conf_table
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+          description: Query configuration.
+        "400":
+          description: Invalid input.
+        "404":
+          description: id check failed.
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+          description: id retrieval failed.
+      security:
+      - ca_key: []
+      summary: GetConfig
+      tags:
+      - config
+  /health:
+    get:
+      operationId: GetHealth
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+          description: App service health status
+      summary: health
+      tags:
+      - health
+components:
+  schemas:
+    ApiResponse:
+      example:
+        sub_message: sub_message
+        code: 0
+        data: "{}"
+        message: message
+        items:
+        - "{}"
+        - "{}"
+      properties:
+        code:
+          format: int32
+          title: code
+          type: integer
+        message:
+          title: message
+          type: string
+        sub_message:
+          description: error message.
+          title: sub_message
+          type: string
+        data:
+          title: data
+          type: object
+        items:
+          items:
+            type: object
+          title: items
+          type: array
+      title: ApiResponse
+      type: object
+  securitySchemes:
+    ca_key:
+      in: header
+      name: Authorization
+      type: apiKey

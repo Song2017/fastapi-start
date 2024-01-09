@@ -7,9 +7,9 @@ info:
   version: '0.0.1'
 servers:
   - url: http://localhost:9000/api
-    variables: {}
+    variables: { }
 paths:
-  /config/connector/{id}:
+  /config:
     get:
       tags:
         - config
@@ -17,37 +17,28 @@ paths:
       description: Get connector config.
       operationId: GetConfig
       security:
-        - ca_key: []
+        - ca_key: [ ]
       parameters:
-        - name: id
-          in: path
-          description: Connector Id, e.g. sfexpress.test
+        - name: conf_id
+          in: query
+          description: Configuration Id, e.g. sf_express.test
           required: true
           style: simple
           explode: false
           schema:
             type: string
-        - name: connector
+        - name: conf_table
           in: query
-          description: Connector-self Name
+          description: Configuration Table, e.g sf_express
           required: true
-          style: form
-          explode: false
-          schema:
-            type: string
-        - name: cache
-          in: query
-          description: Cache that customer ID and name is matched.
-            If the value is `disable`, the cache will not be checked
-          required: false
           style: form
           explode: false
           schema:
             type: string
       responses:
         200:
-          description: User ID and Name has been checked successfully.
-          headers: {}
+          description: Query configuration.
+          headers: { }
           content:
             application/json:
               schema:
@@ -72,30 +63,12 @@ paths:
       responses:
         200:
           description: App service health status
-          headers: {}
+          headers: { }
           content:
             application/json:
               schema:
                 type: object
-  /metrics:
-    get:
-      tags:
-        - health
-      summary: metrics
-      operationId: getMetrics
-      responses:
-        "200":
-          content:
-            text/plain:
-              schema:
-                type: string
-          description: App metrics
-        "400":
-          description: Invalid input
-        "401":
-          description: 'Unauthorized: provided apikey is not valid'
-        "500":
-          description: Server error
+
 
 components:
   schemas:

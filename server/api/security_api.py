@@ -2,6 +2,9 @@
 from fastapi import Security, HTTPException
 from fastapi.security.api_key import APIKeyHeader
 
+from core import APP_CONF
+from swagger_server.src.http_server.models.extra_models import TokenModel
+
 
 def get_token_ca_key(
         token_api_key_header: str = Security(
@@ -18,7 +21,7 @@ def get_token_ca_key(
     if api_key is invalid or does not allow access to called API
     :rtype: TokenModel | None
     """  # noqa:E501
-    if token_api_key_header == APP_CONF.SECURITY_KEY:
+    if token_api_key_header == APP_CONF.TOKEN:
         return TokenModel(sub="")
     else:
         raise HTTPException(

@@ -30,19 +30,3 @@ router = APIRouter()
 async def get_health(
 ) -> object:
     return {"status": "ok"}
-
-
-@router.get(
-    "/metrics",
-    responses={
-        200: {"model": str, "description": "BBC order cancel successed"},
-        400: {"description": "Invalid input"},
-        401: {"description": "Unauthorized: provided apikey is not valid"},
-        500: {"description": "Server error"},
-    },
-    tags=["health"],
-    summary="metrics",
-)
-async def get_metrics(
-) -> str:
-    return "metrics"

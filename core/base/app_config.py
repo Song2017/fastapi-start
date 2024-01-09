@@ -15,7 +15,7 @@ class AppSetting(metaclass=Singleton):
     APP_VERSION_PATH: str = "/api"
     DEBUG = False
     PORT = 9000
-    SECURITY_KEY: str = "test"
+    TOKEN: str = "test"
 
     PG_CONF: dict
     REDIS_CONF: dict
@@ -30,5 +30,5 @@ class AppSetting(metaclass=Singleton):
 
         app_conf = app_setting.get("APP_CONF")
         self.DEBUG = app_conf.get("APP_MODE") == "debug"
-        self.SECURITY_KEY = app_conf.get("TOKEN") or self.SECURITY_KEY
+        self.TOKEN = app_conf.get("TOKEN") or self.TOKEN
         self.PORT = app_conf.get("PORT") or self.PORT

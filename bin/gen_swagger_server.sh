@@ -2,7 +2,7 @@
 
 # configuration
 input="server/data/demo.yaml"
-output="swagger-server"
+output="swagger_server"
 type="python-fastapi"
 pkg_name="http_server"
 pkg_version="0.0.1"
