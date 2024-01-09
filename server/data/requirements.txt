@@ -1,0 +1,18 @@
+-i https://mirrors.aliyun.com/pypi/simple/
+
+arrow==0.12.1
+cryptography~=36.0.1
+fastapi==0.54.1
+gunicorn==20.1.0
+httpx==0.24.1
+jinja2==3.1.2
+psycopg2-binary==2.9.5
+pydantic==1.10.12
+python-dateutil~=2.8.2
+redis==3.5.2
+sqlalchemy==1.4.31
+starlette==0.13.2
+swagger-ui-bundle==0.0.9
+uvicorn==0.15.0
+xmltodict==0.12.0
+aiofiles==23.1.0
