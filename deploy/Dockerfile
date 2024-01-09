@@ -2,8 +2,8 @@ FROM python:3.9-slim
 
 LABEL maintainer="bensong2017@gmail.com"
 
-COPY ./server/data/requirements.txt /tmp/requirements.txt
-RUN pip install --no-cache-dir -i https://pypi.douban.com/simple/ -r /tmp/requirements.txt
+COPY ./requirements.txt /tmp/requirements.txt
+RUN pip install --no-cache-dir -r /tmp/requirements.txt
 
 COPY ./deploy/start.sh /start.sh
 RUN chmod +x /start.sh
